@@ -1,54 +1,35 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:4000");
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [text, setText] = useState("");
-  function handleChange(e) {
-    setText(e.target.value);
-  }
-  function handleDecrement() {
-    setCount((count) => count - 1);
-  }
-
+  const [username, setUsername] = useState("");
+  const [roomId, setRoomId] = useState("");
+  const joinRoom = () => {
+    if (username !== "" && roomId !== "") {
+      socket.emit("join_room", roomId);
+    }
+  };
   return (
     <div className="App">
-      <div>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>React</h1>
-      <div className="card">
-        <button
-          disabled={count >= 10 && true}
-          onClick={() => setCount((count) => count + 1)}
-        >
-          count is {count}
-        </button>
-        <button
-          onClick={handleDecrement}
-          disabled={count <= 0 && true}
-          style={{ marginLeft: 10 }}
-        >
-          Decrement button
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <div>
+      <h1>Join a Chat</h1>
+      <div style={{ marginBottom: 10 }}>
         <input
-          style={{ borderRadius: 10, height: 10, padding: 10, border: "none" }}
           type="text"
-          onChange={handleChange}
+          placeholder="Enter your username"
+          style={{ marginRight: 10, height: 30 }}
+          onChange={(e) => setUsername(e.target.value)}
         />
-        <p>{text}</p>
+        <input
+          style={{ height: 30 }}
+          type="text"
+          placeholder="Enter a room id"
+          onChange={(e) => setRoomId(e.target.value)}
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <button onClick={joinRoom}>Join a chat</button>
     </div>
   );
 }
