@@ -13,7 +13,15 @@ function App() {
     }
   };
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        border: "1px solid lightgrey",
+        padding: 40,
+        borderRadius: 15,
+        height: 300,
+      }}
+    >
       <h1>Join a Chat</h1>
       <div style={{ marginBottom: 10 }}>
         <input
