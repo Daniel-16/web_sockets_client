@@ -1,4 +1,4 @@
-# Web Socket React
+# Web Sockets with React
 
 This is a template repository for creating a React project with Vite build tool. It includes pre-configured settings to quickly get started with building your React applications.
 
