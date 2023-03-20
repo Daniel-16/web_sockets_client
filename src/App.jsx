@@ -9,7 +9,7 @@ const socket = io.connect("http://localhost:4000");
 function App() {
   const [username, setUsername] = useState("");
   const [roomId, setRoomId] = useState("");
-  const navigate = useNavigate();
+  const [showChat, setShowChat] = useState(false);
   const joinRoom = () => {
     if (username !== "" && roomId !== "") {
       socket.emit("join_room", roomId);
@@ -19,40 +19,45 @@ function App() {
     e.preventDefault();
     if (username && roomId !== "") {
       socket.emit("join_room", roomId);
-      // navigate("/chat");
+      setShowChat(true);
     }
   }
   return (
-    <div
-      className="App"
-      style={{
-        border: "1px solid lightgrey",
-        padding: 40,
-        borderRadius: 15,
-        height: 300,
-      }}
-    >
-      <h1>Join a Chat</h1>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 10 }}>
-          <input
-            type="text"
-            placeholder="Enter your username"
-            style={{ marginRight: 10, height: 30 }}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            style={{ height: 30 }}
-            type="text"
-            placeholder="Enter a room id"
-            onChange={(e) => setRoomId(e.target.value)}
-          />
+    <div>
+      {!showChat ? (
+        <div
+          className="App"
+          style={{
+            border: "1px solid lightgrey",
+            padding: 40,
+            borderRadius: 15,
+            height: 300,
+          }}
+        >
+          <h1>Join a Chat</h1>
+          <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: 10 }}>
+              <input
+                type="text"
+                placeholder="Enter your username"
+                style={{ marginRight: 10, height: 30 }}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                style={{ height: 30 }}
+                type="text"
+                placeholder="Enter a room id"
+                onChange={(e) => setRoomId(e.target.value)}
+              />
+            </div>
+            {/* <Link to={"/chat"}> */}
+            <button>Join a chat</button>
+            {/* </Link> */}
+          </form>
         </div>
-        {/* <Link to={"/chat"}> */}
-        <button>Join a chat</button>
-        {/* </Link> */}
-      </form>
-      <ChatPage socket={socket} username={username} room={roomId} />
+      ) : (
+        <ChatPage socket={socket} username={username} room={roomId} />
+      )}
     </div>
   );
 }
