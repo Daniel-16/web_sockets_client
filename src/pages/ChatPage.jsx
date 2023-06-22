@@ -24,7 +24,7 @@ const ChatPage = ({ socket, username, room }) => {
       console.log(data);
       setReceivedMessage((list) => [...list, data.message]);
     });
-  }, [socket]);
+  }, []);
 
   return (
     <div>
