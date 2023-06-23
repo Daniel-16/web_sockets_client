@@ -38,7 +38,7 @@ const ChatPage = ({ socket, username, room }) => {
         <input
           type="text"
           value={currentMessage}
-          style={{ height: 38, marginRight: 10 }}
+          style={{ height: 38, marginRight: 10, borderRadius:10, outline: "none", border: "none", textAlign: "center" }}
           placeholder="Enter a message"
           onChange={(e) => setCurrentMessage(e.target.value)}
           required

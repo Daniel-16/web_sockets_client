@@ -40,18 +40,18 @@ function App() {
               <input
                 type="text"
                 placeholder="Enter your username"
-                style={{ marginRight: 10, height: 30 }}
+                style={{ marginRight: 10, height: 50, borderRadius: 10, textAlign: "center", border: "none", outline: "none" }}
                 onChange={(e) => setUsername(e.target.value)}
               />
               <input
-                style={{ height: 30 }}
+                style={{ height: 50, textAlign: "center", borderRadius: 10, border: "none", outline: "none" }}
                 type="text"
                 placeholder="Enter a room id"
                 onChange={(e) => setRoomId(e.target.value)}
               />
             </div>
             {/* <Link to={"/chat"}> */}
-            <button>Join a chat</button>
+            <button style={{ height: 40, borderRadius: 10 }}>Join a chat</button>
             {/* </Link> */}
           </form>
         </div>
